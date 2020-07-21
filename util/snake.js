@@ -1,4 +1,4 @@
-export default class Queue {
+export default class Snake {
   constructor() {
     this.arr = [];
     this.add = (element) => {
@@ -11,5 +11,8 @@ export default class Queue {
       return this.arr[0];
     }
     this.length = () => this.arr.length;
+    this.contains = (searchPoint) => {
+      return this.arr.some((snakePoint) => searchPoint.equals(snakePoint))
+    }
   }
 }
