@@ -21,3 +21,11 @@
 .snake {
   background-color: black;
 }
+
+.head {
+  background-color: green;
+}
+
+.apple {
+  background-color: red;
+}
