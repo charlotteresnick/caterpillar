@@ -4,7 +4,7 @@ export default class Snake {
     this.add = (element) => {
       return this.arr.push(element);
     };
-    this.remove = () => {
+    this.pop = () => {
       return this.arr.shift()
     };
     this.peek = () => {
