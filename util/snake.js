@@ -24,5 +24,6 @@ export default class Snake {
     this.eatSelf = () => this.arr.slice(0, this.arr.length - 2).some((point) => point.equals(this.peek()))
     // if snake head = point in snake arr x 2
     // end game
+    this.reset = () => this.arr = [];
   }
 }
