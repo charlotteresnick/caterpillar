@@ -90,7 +90,7 @@ const init = () => {
   drawBoard();
   spawnFruit();
   configureButtonsAndKeys();
-  updateMessage("Press space to start the game")
+  updateMessage("Press spacebar to start the game!")
 }
 
 const deinit = () => {
@@ -131,9 +131,9 @@ const keyEvents = (event) => {
 
       if (!gameOver) {
         if (paused) {
-          updateMessage("Game is paused")
+          updateMessage("Game is paused! Press spacebar to resume")
         } else {
-          updateMessage("Press space to pause")
+          updateMessage("Press space to pause game")
         }
       }
       break;
