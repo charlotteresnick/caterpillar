@@ -48,6 +48,10 @@ const FRUITS = [
   "./assets/orange.png",
   "./assets/cherries.jpg",
   "./assets/melon.png",
+  "./assets/grapefruit.png",
+  "./assets/kiwi.jpg",
+  "./assets/papaya.png",
+  "./assets/berry.png",
 ]
 
 const snake = new Snake();
