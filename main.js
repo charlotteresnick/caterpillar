@@ -25,16 +25,19 @@ const LEVELS = {
     speed: 500,
     numCols: 10,
     numRows: 10,
+    objective: 20,
   },
   'medium': {
     speed: 250,
     numCols: 15,
     numRows: 15,
+    objective: 40,
   },
   'hard': {
     speed: 125,
     numCols: 20,
     numRows: 20,
+    objective: 400 - SNAKE_START_LENGTH,
   },
 }
 const FRUITS = [
@@ -79,10 +82,11 @@ const init = () => {
   resizeGrid()
 
   spawnSnake();
-  spawnFruit();
   updateScore();
   drawBoard();
+  spawnFruit();
   configureButtonsAndKeys();
+  updateMessage("Press space to start the game")
 }
 
 const deinit = () => {
@@ -120,6 +124,14 @@ const keyEvents = (event) => {
       break;
     case " ":
       paused = !paused;
+
+      if (!gameOver) {
+        if (paused) {
+          updateMessage("Game is paused")
+        } else {
+          updateMessage("Press space to pause")
+        }
+      }
       break;
   }
 }
@@ -138,7 +150,7 @@ const resizeGrid = () => {
 }
 
 const updateScore = () => {
-  document.querySelector('#data > p').textContent = snake.size() - SNAKE_START_LENGTH;
+  document.querySelector('#data > p').textContent = `${snake.size() - SNAKE_START_LENGTH}/${LEVELS[level].objective}`;
 }
 
 const configureButtonsAndKeys = () => {
@@ -193,6 +205,11 @@ const validateBoardState = () => {
   return true;
 }
 
+
+const checkWin = () => {
+  return snake.size() - SNAKE_START_LENGTH >= LEVELS[level].objective
+}
+
 const randomizeFruit = () => {
   fruit.setAttribute('src', FRUITS[(Math.floor(Math.random() * FRUITS.length))])
 }
@@ -201,11 +218,11 @@ const spawnFruit = () => {
   const emptySquares = (LEVELS[level].numCols * LEVELS[level].numRows) - snake.size();
   const fruitIdx = Math.floor(Math.random() * emptySquares);
 
-  let currentIdx = 0
+  let currentIdx = -1
   searchLoop:
   for (let i = 0; i < LEVELS[level].numRows; i++) {
     for (let j = 0; j < LEVELS[level].numCols; j++) {
-      if (!board[i][j].classList.contains('snake')) {
+      if (!snake.contains(new Point(i, j))) {
         currentIdx += 1
       }
 
@@ -260,6 +277,11 @@ const resetGame = (e) => {
   init()
 }
 
+const updateMessage = (msg) => {
+  const message = document.querySelector("#subtitle");
+  message.innerHTML = msg
+}
+
 const loop = () => {
   if (!paused && !gameOver) {
     moveSnake();
@@ -267,6 +289,12 @@ const loop = () => {
       drawBoard();
     } else {
       gameOver = true;
+      updateMessage("Game Over!")
+    }
+    
+    if (checkWin()) {
+      gameOver = true;
+      updateMessage("YOU WIN!")
     }
   }
   setTimeout(loop, LEVELS[level].speed);

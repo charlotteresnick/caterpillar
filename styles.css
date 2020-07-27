@@ -23,6 +23,12 @@ h1 {
   color: white;
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: black;
+  letter-spacing: 5px;
+}
+
+h2 {
+  margin-block-start: 0px;
+  margin-block-end: 10px;
 }
 
 .square {
@@ -43,7 +49,6 @@ h1 {
 }
 
 .reset {
-
   font-size: 20pt;
   font-family: 'Mulish', sans-serif;
   background-color: white;
@@ -129,6 +134,12 @@ h1 {
 
 .desktop {
   display: block;
+}
+
+#subtitle {
+  font-family: 'Sacramento', cursive;
+  font-size: 30pt;
+  color: black;
 }
 
 @media only screen and (max-width: 966px) {
